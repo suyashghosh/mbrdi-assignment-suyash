@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package com.mbrdi.protobufs;
+
+option java_multiple_files = true;
+option java_package = "com.mbrdi.protobufs";
+option java_outer_classname = "CustomerProtoOuterClass";
+
+message CustomerTransferProto {
+
+	optional bool is_update = 1;
+	optional bool is_xmlfile = 2;
+	repeated CustomerProto customers = 3;
+
+}
+
+message CustomerProto {
+
+	optional int32 id = 1;
+	optional string name = 2;
+	optional string dob = 3;
+	optional string salary = 4;
+	optional int32 age = 5;
+}
