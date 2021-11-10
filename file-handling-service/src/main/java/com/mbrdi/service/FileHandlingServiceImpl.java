@@ -32,7 +32,6 @@ public class FileHandlingServiceImpl implements FileHandlingService {
 
 			// decoding byteArray to google protobuf
 			CustomerTransferProto customerTransferProto = CustomerTransferProto.parseFrom(byteArr);
-			System.out.println(customerTransferProto);
 			if(customerTransferProto.getCustomersList().size() == 0) {
 				return;
 			}
