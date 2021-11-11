@@ -3,6 +3,8 @@ package com.mbrdi.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -14,8 +16,10 @@ import com.mbrdi.model.CustomerDTO;
 import com.mbrdi.protobufs.CustomerProto;
 import com.mbrdi.protobufs.CustomerTransferProto;
 
+
 @Service
 public class FileHandlingServiceImpl implements FileHandlingService {
+	Logger logger = LoggerFactory.getLogger(FileHandlingServiceImpl.class);
 
 	@Autowired
 	CsvFileHandler csvFileHandler;
@@ -32,6 +36,7 @@ public class FileHandlingServiceImpl implements FileHandlingService {
 
 			// decoding byteArray to google protobuf
 			CustomerTransferProto customerTransferProto = CustomerTransferProto.parseFrom(byteArr);
+			logger.info("Consumed from Kafka\n" + customerTransferProto);
 			if(customerTransferProto.getCustomersList().size() == 0) {
 				return;
 			}
